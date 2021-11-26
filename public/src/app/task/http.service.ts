@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +9,11 @@ export class HttpService {
 
   constructor(private _http: HttpClient) { 
     this.fetchTasks();
+    this.fetchTasksByName("Ronaldo");
   }
 
   fetchTasks(): void{
-    this._http.get( "http://localhost:8080/tasks" )
+    this._http.get( "http://localhost:8080/tasks/" )
       .subscribe( (data:any) => {
         this.task = data;
         console.log( "All TASKS: ", this.task );
@@ -25,7 +24,7 @@ export class HttpService {
     this._http.get( "http://localhost:8080/tasks/"+ title )
       .subscribe( (data:any) => {
         this.task = data;
-        console.log( this.task );
+        console.log("Find by Name", this.task );
       });
   }
 
